@@ -17,7 +17,7 @@ Ellipse::Ellipse(const Point &center, double radiusA, double radiusB)
 
 string Ellipse::ToString() const {
 	stringstream retVal;
-	retVal << "{" << Shape::ToString() << ", Center: " << _center.ToString()
+	retVal << "{Ellipse " << Shape::ToString() << ", Center: " << _center.ToString()
 	       << ", a: " << _radiusA << ", b: " << _radiusB << "}";
 	return retVal.str();
 }

@@ -34,3 +34,16 @@ double Point::GetX() const {
 double Point::GetY() const {
     return _y;
 }
+
+bool Point::operator==(const Point &rhs) const {
+	if (this == &rhs)
+		return true;
+	if (abs(_x - rhs._x) < 1e-6 && abs(_y - rhs._y) < 1e-6)
+		return true;
+	else
+		return false;
+}
+
+bool Point::operator!=(const Point &rhs) const {
+	return !(*this == rhs);
+}

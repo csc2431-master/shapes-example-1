@@ -17,6 +17,8 @@ public:
     double Distance(const Point& point)const;
     double GetX()const;
     double GetY()const;
+    bool operator==(const Point& rhs)const;
+	bool operator!=(const Point& rhs)const;
 };
 
 
