@@ -15,10 +15,10 @@ using std::stringstream;
 using std::max;
 
 Triangle::Triangle(const Point &a, const Point &b, const Point &c) : _a(a), _b(b), _c(c) {
-	assert(a == b || b == c || a == c);
+	assert(a != b && b != c && a != c);
 
 	// vertical line
-	assert(abs(_a.GetX() - _b.GetX()) < 1e-6 && abs(_c.GetX() - _b.GetX()) < 1e-6);
+	assert(!(abs(_a.GetX() - _b.GetX()) < 1e-6 && abs(_c.GetX() - _b.GetX()) < 1e-6));
 
 	if (abs(_a.GetX() - _b.GetX()) < 1e-6){ // Avoid infinite slope
 		return;
@@ -28,7 +28,7 @@ Triangle::Triangle(const Point &a, const Point &b, const Point &c) : _a(a), _b(b
 	}
 	double slope1 = ( _a.GetY() - _b.GetY() ) / ( _a.GetX() - _b.GetX() );
 	double slope2 = ( _c.GetY() - _b.GetY() ) / ( _c.GetX() - _b.GetX() );
-	assert(abs(slope1 - slope2) < 1e-6); // if two slopes are the same, it's not a triangle
+	assert(abs(slope1 - slope2) >= 1e-6); // if two slopes are the same, it's not a triangle
 }
 
 string Triangle::ToString() const {
@@ -60,7 +60,7 @@ double Triangle::Hypotenuse() const {
 	return max(lengthAB, max(lengthBC, lengthAC));
 }
 double FindAngle(double oppositeLength, double side1, double side2){
-	return acos(pow(side1, 2) + pow(side2, 2)- pow(oppositeLength, 2)/ (2 * side1 * side2));
+	return acos((pow(side1, 2) + pow(side2, 2) - pow(oppositeLength, 2)) / (2 * side1 * side2));
 }
 double Triangle::AngleA() const {
 	double lengthAB = _a.Distance(_b);
